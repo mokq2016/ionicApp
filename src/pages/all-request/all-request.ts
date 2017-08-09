@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Http } from '@angular/http';
 /**
  * Generated class for the AllRequestPage page.
  *
@@ -11,32 +11,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   templateUrl: 'all-request.html'
 })
-export class AllRequestPage {
-  items:Array<Object> = [{
-    author:{
-      loginname:'323'
-    },
-    create_at:'2017-01-22',
-    title:'让我们来玩ionic吧',
-    visit_count:4343,
-    reply_count:232,
-    last_reply_at:'今天'
-  },
-{
-    author:{
-      loginname:'323'
-    },
-    create_at:'2017-01-22',
-    title:'让我们来玩ionic吧',
-    visit_count:4343,
-    reply_count:232,
-    last_reply_at:'今天'
-  }];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class AllRequestPage{
+  items: Array<Object> = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
   }
-
+  ngOnInit(){
+  this.http.get('https://cnodejs.org/api/v1/topics?page=0&tab=all&limit=20').subscribe((res) => {
+      let result = res.json();
+      if(result.success){
+        this.items = result.data;
+      }
+    })
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllRequestPage');
+    
   }
 
 }

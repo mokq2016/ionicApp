@@ -4,6 +4,6 @@
     "type": "ionic-angular",
     "proxies": [{
         "path": "/api",
-        "proxyUrl": "https://api.instagram.com/api"
+        "proxyUrl": "https://cnodejs.org/api"
     }]
 }
