@@ -1,0 +1,35 @@
+.container {
+    .content {
+        background: #fff;
+        margin-top: 1rem;
+        padding: 1rem 1rem 0 1rem;
+        .top-div {
+            display: flex;
+        }
+        .title-div {
+            strong {
+                font-size: 2rem;
+            }
+        }
+        .foot-div {
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border-top: 1px solid #ccc;
+            display: flex;
+            .item {
+                ion-icon {
+                    margin-top: 0.5rem;
+                }
+                height: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 33%;
+            }
+            .reply,
+            .click {
+                border-right: 1px solid #ccc;
+            }
+        }
+    }
+}

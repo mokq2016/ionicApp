@@ -1,0 +1,39 @@
+<!--
+  Generated template for the AllRequestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content style='background:#DADADA'>
+    <div class='container'>
+        <div class="content" *ngFor='let item of items'>
+            <div class="top-div">
+                <div class='img'>123</div>
+                <div class="box">
+                    <label>{{item.author.loginname}}</label>
+                    <div>
+                        <time>{{item.create_at}}</time>
+                        <span>#分享</span>
+                    </div>
+                </div>
+            </div>
+            <div class="title-div">
+                <strong>{{ item.title }}</strong>
+            </div>
+            <div class="foot-div">
+                <div class="item click">
+                    <ion-icon name="eye-outline"></ion-icon>
+                    <span>{{ item.visit_count > 0 ? item.visit_count : '暂无阅读' }}</span>
+                </div>
+                <div class="item reply">
+                    <ion-icon name="text-outline"></ion-icon>
+                    <span>{{ item.reply_count > 0 ? item.reply_count : '暂无评论' }}</span>
+                </div>
+                <div class="item">
+                    <span>{{ item.last_reply_at}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
