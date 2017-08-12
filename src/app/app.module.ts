@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpProvider } from '../providers/http/http';
+import { NativeProvider } from '../providers/native/native';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpProvider } from '../providers/http/http';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      activator: 'highlight'
+      activator: 'highlight',
+      backButtonText:''
     }),
     SuperTabsModule.forRoot()
   ],
@@ -31,7 +33,8 @@ import { HttpProvider } from '../providers/http/http';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    HttpProvider
+    HttpProvider,
+    NativeProvider
   ]
 })
 export class AppModule { }

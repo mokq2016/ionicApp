@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { HttpProvider } from '../../providers/http/http'
 
 /**
  * Generated class for the TopicPage page.
@@ -15,10 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TopicPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  topicId: string = '';
+  topHtml: string = '';
+  constructor(public navCtrl: NavController, public app: App, public navParams: NavParams, public http: HttpProvider) {
+    this.topicId = navParams.get('topicId');
   }
-  ngOnInit(){
-    
+  ngOnInit() {
+    this.http.get(`/api/v1/topic/${this.topicId}`).subscribe((res) => {
+      let result = res.json();
+      if(result.success){
+        this.topHtml = result.data.content;
+      }else{
+
+      }
+    })
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TopicPage');

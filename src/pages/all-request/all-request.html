@@ -10,7 +10,7 @@
         <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="加载中..."></ion-refresher-content>
     </ion-refresher>
     <div class='container'>
-        <div class="content" *ngFor='let item of items'>
+        <div class="content" (click)='showTopic(item.id)' *ngFor='let item of items'>
             <div class="top-div">
                 <div class='img' [style.background]="'url(' +item.author.avatar_url+ ')'"></div>
                 <div class="box">
