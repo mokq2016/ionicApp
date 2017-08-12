@@ -6,6 +6,9 @@
 -->
 
 <ion-content style='background:#DADADA'>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="加载中..."></ion-refresher-content>
+    </ion-refresher>
     <div class='container'>
         <div class="content" *ngFor='let item of items'>
             <div class="top-div">
@@ -36,4 +39,8 @@
             </div>
         </div>
     </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="拼命加载中..." threshold='10%'>
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

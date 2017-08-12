@@ -13,13 +13,35 @@ import { Http } from '@angular/http';
 })
 export class AllRequestPage{
   items: Array<Object> = [];
+  currentPage:number = 1;
+  pageSize:number = 10;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
   }
   ngOnInit(){
-  this.http.get('https://cnodejs.org/api/v1/topics?page=0&tab=all&limit=20').subscribe((res) => {
+  this.http.get('/api/v1/topics?page=1&tab=all&limit=10').subscribe((res) => {
       let result = res.json();
       if(result.success){
         this.items = result.data;
+        this.currentPage = 1;
+      }
+    })
+  }
+  doRefresh(refresher){
+    this.http.get('/api/v1/topics?page=1&tab=all&limit=10').subscribe((res) => {
+      let result = res.json();
+      if(result.success){
+        this.items = result.data;
+        this.currentPage = 1;
+        refresher.complete();
+      }
+    })
+  }
+  doInfinite(infiniteScroll){
+    this.http.get(`/api/v1/topics?page=${ ++this.currentPage}&tab=all&limit=${this.pageSize}`).subscribe((res) => {
+      let result = res.json();
+      if(result.success){
+        this.items = this.items.concat(result.data);
+        infiniteScroll.complete();
       }
     })
   }
