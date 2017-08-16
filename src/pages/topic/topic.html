@@ -15,8 +15,38 @@
 
 <ion-content>
     <div class="container">
+        <div class="header">
+            <div class="title">
+                <span></span>
+                <h2>{{topInfo.title}}</h2>
+            </div>
+            <div class="author">
+                <div class='img' [style.background]="'url(' +imgUrl+ ')'"></div>
+                <div class="box">
+                    <span>{{topInfo.author.loginname}}</span>
+                    <div>
+                        <time>{{topInfo.create_at | formatDate}}</time>
+                        <span>#分享</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="content" [innerHtml]='topHtml'>
 
+        </div>
+        <div class="replies">
+            <p>{{replies.length}} 回复</p>
+            <div class="reply-content" *ngFor='let item of replies;let i = index;'>
+                <div class="author">
+                    <div class='img' [style.background]="'url(' +item.author.avatar_url+ ')'"></div>
+                    <div class="box">
+                        <span>{{item.author.loginname}}</span>
+                        <span>{{i+1}} 楼</span>
+                        <time>•{{item.create_at | formatDate}}</time>
+                    </div>
+                </div>
+                <div class='info' [innerHtml]='item.content'></div>
+            </div>
         </div>
     </div>
 </ion-content>

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core'
 import { IonicPageModule } from 'ionic-angular'
 
 import { AllRequestPage } from './all-request'
-import { FormatDatePipe } from '../../pipes/format-date/format-date'
+import { PipesModule } from '../../pipes/pipes.module'
 
 @NgModule({
-    declarations: [AllRequestPage, FormatDatePipe],
-    imports: [IonicPageModule.forChild(AllRequestPage)],
+    declarations: [AllRequestPage],
+    imports: [IonicPageModule.forChild(AllRequestPage),PipesModule  ],
     exports: [AllRequestPage]
 })
 export class AllRequestPageModule { }
