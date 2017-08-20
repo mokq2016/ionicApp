@@ -41,6 +41,29 @@ export class AllRequestPage {
       }
     })
   }
+  getType(top,good,tab){
+    let type = '';
+    if(top){
+      return '置顶';
+    }else if(good){
+      return '精华';
+    }else{
+      switch(tab){
+        case 'share':
+        type = '分享';
+        break;
+        case 'job':
+        type = '招聘';
+        break;
+        case 'ask':
+        type = '问答';
+        break;
+        default:
+        type = '未知类型';
+      }
+      return type;
+    }
+  }
   doInfinite(infiniteScroll) {
     this.http.get(`/api/v1/topics?page=${++this.currentPage}&tab=all&limit=${this.pageSize}`).subscribe((res) => {
       let result = res.json();

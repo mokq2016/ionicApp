@@ -7,6 +7,42 @@
 
 
 
-<ion-content padding>
-
+<ion-content style='background:#DADADA'>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="加载中..."></ion-refresher-content>
+    </ion-refresher>
+    <div class='container'>
+        <div class="content" (click)='showTopic(item.id)' *ngFor='let item of items'>
+            <div class="top-div">
+                <div class='img' [style.background]="'url(' +item.author.avatar_url+ ')'"></div>
+                <div class="box">
+                    <label>{{item.author.loginname}}</label>
+                    <div>
+                        <time>{{item.create_at | formatDate}}</time>
+                        <span>#分享</span>
+                    </div>
+                </div>
+            </div>
+            <div class="title-div">
+                <strong>{{ item.title }}</strong>
+            </div>
+            <div class="foot-div">
+                <div class="item click">
+                    <ion-icon name="eye-outline"></ion-icon>
+                    <span>{{ item.visit_count > 0 ? item.visit_count : '暂无阅读' }}</span>
+                </div>
+                <div class="item reply">
+                    <ion-icon name="text-outline"></ion-icon>
+                    <span>{{ item.reply_count > 0 ? item.reply_count : '暂无评论' }}</span>
+                </div>
+                <div class="item">
+                    <span>{{ item.last_reply_at | formatDate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="拼命加载中..." threshold='10%'>
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

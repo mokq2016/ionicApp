@@ -21,6 +21,18 @@
             strong {
                 font-size: 2rem;
             }
+            .from {
+                border: 1px solid #ccc;
+                display: inline-block;
+                padding: 2px 6px;
+                border-radius: 4px;
+                color: #858585;
+                background-color: #E5E5E5;
+            }
+            .from.green {
+                color: #fff;
+                background-color: #80BD01;
+            }
         }
         .foot-div {
             padding: 0.5rem 0;

@@ -22,6 +22,7 @@
                 </div>
             </div>
             <div class="title-div">
+                <span class='from' [ngClass]="{'green':item.top==true || item.good==true}">{{getType(item.top,item.good,item.tab)}}</span>
                 <strong>{{ item.title }}</strong>
             </div>
             <div class="foot-div">

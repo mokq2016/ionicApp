@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { HttpProvider } from '../../providers/http/http'
 /**
  * Generated class for the RequestAnswerPage page.
  *
@@ -14,12 +14,42 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'request-answer.html',
 })
 export class RequestAnswerPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  items: Array<Object> = [];
+  currentPage: number = 1;
+  pageSize: number = 10;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpProvider, public app: App) {
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RequestAnswerPage');
+  ngOnInit() {
+    this.http.get('/api/v1/topics?page=1&tab=ask&limit=10').subscribe((res) => {
+      let result = res.json();
+      if (result.success) {
+        this.items = result.data;
+        this.currentPage = 1;
+      }
+    })
   }
-
+  showTopic(id) {
+    this.app.getRootNav().push('TopicPage', {
+      topicId: id
+    })
+  }
+  doRefresh(refresher) {
+    this.http.get('/api/v1/topics?page=1&tab=ask&limit=10').subscribe((res) => {
+      let result = res.json();
+      if (result.success) {
+        this.items = result.data;
+        this.currentPage = 1;
+        refresher.complete();
+      }
+    })
+  }
+  doInfinite(infiniteScroll) {
+    this.http.get(`/api/v1/topics?page=${++this.currentPage}&tab=ask&limit=${this.pageSize}`).subscribe((res) => {
+      let result = res.json();
+      if (result.success) {
+        this.items = this.items.concat(result.data);
+        infiniteScroll.complete();
+      }
+    })
+  }
 }
